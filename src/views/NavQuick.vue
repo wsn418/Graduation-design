@@ -1,65 +1,115 @@
 <template>
-  <div class="w-75 mx-auto">
-    <div class="bg-white rounded text-center py-5">
+  <div class="w-75 mx-auto shadow">
+    <div class="bg-white1 rounded text-center py-5">
       <div class="d-flex align-items-center justify-content-center">
-        <img src="../assets/baidu.jpg" alt="" style="height:80px" class="mb-4 mr-3">
-        <el-input style="width:400px" class="mr-2"></el-input>
-        <el-button class="bg-primary text-white" >搜索</el-button>
+        <img src="//www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="" style="height:80px" class="mb-4 mr-3">
+        <!-- <span class="mr-3" style="fontSize:30px">百度搜索</span> -->
+        <el-input style="width:400px" class="mr-2" v-model="ipt" @input="changeParams"></el-input>
+        <a :href="currUrl" target="_black">
+          <el-button class="bg-primary text-white" >搜索</el-button>
+        </a>
       </div>
     </div>
-    <div class="bg-white rounded mt-5 py-2">
+    <div class="bg-white1 rounded mt-5 py-2 px-2 shadow">
         <div>
           <span class="p-1 bg-primary mr-3" style="heigth:20px"> </span><span>快捷应用</span>
         </div>
         <div>
-          <ul class="list-inline app mt-2">
+          <ul class="list-inline app mt-2 ">
             <li class="list-inline-item">
-              <div class="d-flex flex-column px-2 text-center">
-                <img src="../assets/counter.jpg" alt="">
-                <span>进制转换器</span>
-              </div>
-            </li>
-            <li class="list-inline-item">
-              <div class="d-flex flex-column px-2 text-center">
-                <img src="../assets/counter.jpg" alt="">
-                <span>todolist</span>
-              </div>
-            </li>
-            <li class="list-inline-item">
+               <router-link to="/News">
                <div class="d-flex flex-column px-2 text-center">
-                 <img src="../assets/counter.jpg" alt="">
-                 <span>身份归属地</span>
+                 <img src="../assets/img/xinwen.png" alt="">
+                 <span class="mt-2">今日要闻</span>
               </div>
+              </router-link>
+            </li>
+             <li class="list-inline-item">
+               <router-link to="/Calendar">
+               <div class="d-flex flex-column px-2 text-center">
+                 <img src="../assets/img/lishi.png" alt="">
+                 <span class="mt-2">历史上的今天</span>
+              </div>
+              </router-link>
             </li>
             <li class="list-inline-item">
+                <router-link to="/qrcode">
                <div class="d-flex flex-column px-2 text-center">
-                 <img src="../assets/counter.jpg" alt="">
-                 <span>历史上的今天</span>
+                 <img src="../assets/img/qrcode.png" alt="">
+                 <span class="mt-2">二维码生成</span>
               </div>
+               </router-link>
             </li>
             <li class="list-inline-item">
+               <router-link to="/GarbageClass">
                <div class="d-flex flex-column px-2 text-center">
-                 <img src="../assets/counter.jpg" alt="">
-                 <router-link to="/qrcode"><span>二维码生成</span></router-link>
+                 <img src="../assets/img/laji.png" alt="">
+                 <span class="mt-2">垃圾分类</span>
               </div>
+              </router-link>
             </li>
-            <li class="list-inline-item">
+            <li class="list-inline-item" @click="change" style="cursor: pointer;">
                <div class="d-flex flex-column px-2 text-center">
-                 <img src="../assets/counter.jpg" alt="">
-                 <router-link to="/Relationship"><span>亲属关系计算器</span></router-link>
-
-              </div>
-            </li>
-            <li class="list-inline-item">
-               <div class="d-flex flex-column px-2 text-center">
-                 <img src="../assets/counter.jpg" alt="">
-                 <span>今日要闻</span>
+                 <img src="../assets/img/xiangxia.png" alt="">
+                 <span class="mt-2" style="text-decoration: underline;">更多</span>
               </div>
             </li>
           </ul>
+           <transition name="el-fade-in">
+            <ul class="list-inline app mt-2 border-top pt-3 px-2" v-if="more">
+              <!-- <li class="list-inline-item">
+              <router-link to="/Weather">
+                <div class="d-flex flex-column px-2 text-center">
+                  <img src="../assets/img/tianqi.png" alt="">
+                  <span class="mt-2">天气查询</span>
+                </div>
+                </router-link>
+              </li> -->
+              <li class="list-inline-item">
+                <router-link to="/IdentAttr">
+                <div class="d-flex flex-column px-2 text-center">
+                  <img src="../assets/img/shenfenzheng.png" alt="">
+                  <span class="mt-2">身份归属地</span>
+                </div>
+                 </router-link>
+              </li>
+              <li class="list-inline-item">
+                <router-link to="/Relationship">
+                <div class="d-flex flex-column px-2 text-center">
+                  <img src="../assets/img/kinship-full.png" alt="">
+                  <span class="mt-2">亲属关系计算器</span>
+                </div>
+                </router-link>
+              </li>
+              <li class="list-inline-item">
+                <router-link to="/NumCase">
+                <div class="d-flex flex-column px-2 text-center">
+                  <img src="../assets/img/shuzi.png" alt="">
+                  <span class="mt-2">数字大写转换</span>
+                </div>
+                </router-link>
+              </li>
+              <li class="list-inline-item">
+                <router-link to="/Ip">
+                <div class="d-flex flex-column px-2 text-center">
+                  <img src="../assets/img/ip.png" alt="">
+                  <span class="mt-2">ip查询</span>
+                </div>
+                </router-link>
+              </li>
+              <li class="list-inline-item">
+                <router-link to="/Encode">
+                <div class="d-flex flex-column px-2 text-center">
+                  <img src="../assets/img/zhuanma.png" alt="">
+                  <span class="mt-2">文字转码</span>
+                </div>
+                </router-link>
+              </li>
+            </ul>
+           </transition>
         </div>
     </div>
-    <div class="bg-white rounded mt-5 py-2">
+    <div class="bg-white1 rounded mt-5 py-2 shadow">
       <div>
         <span class="p-1 bg-primary mr-3" style="heigth:20px"> </span><span>快捷导航</span>
         <div class="pt-3">
@@ -257,9 +307,28 @@
   </div>
 </template>
 <script>
-export default {
-  name: 'nav'
-}
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  name: 'nav',
+  setup () {
+    const more = ref(false)
+    const currUrl = ref('')
+    const change = () => {
+      more.value = !more.value
+    }
+    const ipt = ref('')
+    const changeParams = () => {
+      currUrl.value = 'https://www.baidu.com/s?wd=' + ipt.value
+    }
+    return {
+      more,
+      change,
+      ipt,
+      currUrl,
+      changeParams
+    }
+  }
+})
 </script>
 <style>
 .ksd-link-a>img{
@@ -276,5 +345,21 @@ export default {
 }
 .app img{
   width: 100px;
+}
+a {
+  color:black !important;
+  text-decoration: none !important;
+}
+li img {
+  width: 100px;
+}
+.el-fade-in-leave-active {
+  transition: opacity .1s !important;
+}
+.el-fade-in-enter-active {
+  transition: opacity 1s !important;
+}
+.bg-white1{
+  background-color: rgba(255, 255, 255, 0.6) !important;
 }
 </style>

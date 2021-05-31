@@ -1,14 +1,18 @@
 <template>
-  <nav class="navbar-dark bg-dark justify-content-between  px-4 mb-3">
+  <nav class="navbar-dark justify-content-between  px-4 mb-3" :class="{'bg-dark1':!isIndex1,'bg-my':isIndex1}">
     <div class="w-75 mx-auto navbar">
-    <router-link class="navbar-brand" to="/">学习社区</router-link>
-    <ul  class="list-inline mb-0">
-      <li class="list-inline-item"><router-link to="/" class="btn text-white">首页</router-link></li>
-      <li class="list-inline-item"><router-link to="/home" class="btn text-white">专栏</router-link></li>
-      <li class="list-inline-item"><router-link to="/nav" class="btn text-white">导航</router-link></li>
+    <router-link class="navbar-brand" to="/">
+      <div class="bg-img"> </div>
+      <!-- <span class="text-white">知我</span> -->
+    </router-link>
+    <ul  class="list-inline mb-0" >
+      <li class="list-inline-item" @click="change"><router-link to="/" class="btn text-white">首页</router-link></li>
+      <li class="list-inline-item" @click="change"><router-link to="/home" class="btn text-white">专栏</router-link></li>
+      <li class="list-inline-item" @click="change"><router-link to="/home" class="btn text-white">专栏</router-link></li>
+      <li class="list-inline-item" @click="change"><router-link to="/nav" class="btn text-white">导航</router-link></li>
       <span v-if="!user.isLogin">
-        <li class="list-inline-item"><router-link to="/login" class="btn text-white">登陆</router-link></li>
-        <li class="list-inline-item"><router-link to="/signup" class="btn text-white">注册</router-link></li>
+        <li class="list-inline-item" @click="change"><router-link to="/login" class="btn text-white">登陆</router-link></li>
+        <li class="list-inline-item" @click="change"><router-link to="/signup" class="btn text-white">注册</router-link></li>
       </span>
       <span  v-else>
         <li class="list-inline-item">
@@ -26,8 +30,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineComponent, PropType, getCurrentInstance, ref, watch, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import Dropdown from './Dropdown.vue'
 import DropdownItem from './DropdownItem.vue'
 import store, { UserProps } from '../store'
@@ -45,6 +49,23 @@ export default defineComponent({
     }
   },
   setup() {
+    const route = ref('')
+    const isIndex = ref(true)
+    const ctx = useRoute()
+    watch(() => ctx, (newval, oldval) => {
+      console.log(newval)
+    })
+    const change = () => {
+      console.log('ctx', ctx)
+      route.value = ctx.fullPath
+      console.log('route', route.value)
+      if (route.value === '/') {
+        isIndex.value = true
+      } else {
+        isIndex.value = false
+      }
+    }
+    const isIndex1 = computed(() => store.state.index)
     const router = useRouter()
     const handleLogout = () => {
       store.commit('logout')
@@ -54,7 +75,10 @@ export default defineComponent({
       }, 2000)
     }
     return {
-      handleLogout
+      handleLogout,
+      change,
+      isIndex,
+      isIndex1
     }
   }
 })
@@ -64,4 +88,16 @@ export default defineComponent({
     outline: none;
     box-shadow: none !important;
 }
+.bg-my {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+  .bg-img{
+    width: 100px;
+    height: 35px;
+    background-image: url('../assets/logo2.png');
+    background-position: -388px -36px;
+  }
+  .bg-dark1{
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 </style>

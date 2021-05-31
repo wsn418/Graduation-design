@@ -21,7 +21,8 @@ import 'element-plus/lib/theme-chalk/index.css'
 //   store.commit('setLoading', false)
 //   return Promise.reject(e.response.data)
 // })
-axios.defaults.baseURL = 'http://apis.imooc.com/api/'
+// axios.defaults.baseURL = 'http://apis.imooc.com/api/'
+axios.defaults.baseURL = 'http://localhost:3000/api/'
 axios.interceptors.request.use(config => {
   store.commit('setError', { status: false })
   store.commit('setLoading', true)

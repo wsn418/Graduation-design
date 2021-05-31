@@ -1,6 +1,6 @@
 <template>
-  <div class="signup-page mx-auto p-3 w-330">
-    <h5 class="my-4 text-center">注册者也账户</h5>
+  <div class="signup-page mx-auto p-3 w-330 bg-white1 border rounded shadow-lg">
+    <h4 class="my-4 text-center">注册到知我</h4>
     <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>

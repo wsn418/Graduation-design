@@ -85,7 +85,8 @@ export default {
   background-color: #F6F6F6;
 }
 .bg-E1 {
-  background-color: #EFF3F5;
+  /* background-color: #EFF3F5; */
+  background-color: #0b80bb;
 }
 .btn:focus, .btn:active, .btn:visited {
     outline: none !important;

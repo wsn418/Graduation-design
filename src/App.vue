@@ -1,21 +1,24 @@
 <template>
-  <div class="container-fluid px-0 flex-shrink-0">
-    <global-header :user="currentUser"></global-header>
-    <loader v-if="isLoading"></loader>
-    <router-view></router-view>
-  </div>
-  <footer class="text-center py-4 text-secondary bg-light mt-auto">
-  <small>
-    <ul class="list-inline mb-0">
-      <li class="list-inline-item">© 学习社区 </li>
+    <el-scrollbar>
+    <div class="container-fluid px-0 flex-shrink-0">
+      <global-header :user="currentUser"></global-header>
+      <loader v-if="isLoading"></loader>
+      <router-view></router-view>
+    </div>
+   </el-scrollbar>
+    <!-- <footer class="text-center py-4 text-secondary bg-my mt-auto" :class="{'bg-white':!isIndex1,'bg-my':isIndex1}">
+    <small>
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item" :class="{'text-white' : isIndex1}">© 学习社区 </li>
+      </ul>
+    </small>
+    </footer> -->
 
-    </ul>
-  </small>
-</footer>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted, watch } from 'vue'
+import { defineComponent, computed, onMounted, watch, getCurrentInstance, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -31,7 +34,18 @@ export default defineComponent({
     Loader
   },
   setup() {
+    const ctx = useRoute()
+    watch(() => ctx, (newval, oldval) => {
+      console.log(newval)
+    })
+    // const ctx = useRoute()
+    // console.log('ctx', ctx)
+    // const router = ref('')
+    // const { ctx } = getCurrentInstance()
+    // router.value = ctx.$router.currentRoute.value.path
+    // console.log(ctx.$router.currentRoute.value)
     const store = useStore<GlobalDataProps>()
+    const isIndex1 = computed(() => store.state.index)
     const currentUser = computed(() => store.state.user)
     const isLoading = computed(() => store.state.loading)
     const error = computed(() => store.state.error)
@@ -44,12 +58,17 @@ export default defineComponent({
     return {
       currentUser,
       isLoading,
-      error
+      error,
+      isIndex1
+      // router
     }
   }
 })
 </script>
 
-<style>
-
+<style scoped>
+.bg-my {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
 </style>

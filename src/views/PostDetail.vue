@@ -13,7 +13,8 @@
         <li class="breadcrumb-item active" aria-current="page">{{currentPost.title}}</li>
       </ol>
     </nav>
-    <article class="mb-5 pb-3" v-if="currentPost">
+    <article class="mb-5 pb-3 bg-white1 px-2" v-if="currentPost">
+
       <img :src="currentImageUrl" alt="currentPost.title" class="rounded-lg img-fluid my-4" v-if="currentImageUrl">
       <h2 class="mb-4">{{currentPost.title}}</h2>
       <div class="user-profile-component border-top border-bottom py-3 mb-5 align-items-center row g-0">
@@ -22,7 +23,7 @@
         </div>
         <span class="text-muted col text-right font-italic">发表于：{{currentPost.createdAt}}</span>
       </div>
-      <div v-html="currentHTML"></div>
+      <div v-html="currentHTML" class="imgWidth"></div>
       <div v-if="showEditArea" class="btn-group mt-5">
         <router-link type="button" class="btn btn-success" :to="{ name: 'create', query: {id: currentPost._id}}">编辑</router-link>
         <button type="button" class="btn btn-danger" @click="modalIsVisible = true">删除</button>
@@ -101,3 +102,8 @@ export default defineComponent({
   }
 })
 </script>
+<style scoped>
+>>> .imgWidth img {
+  width: 100%;
+}
+</style>

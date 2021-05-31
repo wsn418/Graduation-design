@@ -1,6 +1,10 @@
 <template>
-  <div class="w-75 mx-auto d-flex justify-content-center">
-    <div class="d-flex align-items-center">
+   <div class="w-50 bg-white1 mx-auto mb-2 py-2">
+    <el-page-header icon="el-icon-arrow-left" content="二维码自动生成" @click='goback'></el-page-header>
+  </div>
+  <div class="w-50 bg-white1 mx-auto d-flex flex-column text-center py-3" style="height:500px">
+    <h1>二维码自动生成</h1>
+    <div class="d-flex justify-content-center mt-3">
     <div class="d-flex flex-column ">
       <div class="d-flex justify-content-between align-items-end mb-2" style="width:400px">
       <span style="fontSize:25px" class="text-secondary">输入文字</span>
@@ -60,10 +64,14 @@ export default defineComponent({
     onMounted(() => {
       init()
     })
+    const goback = function() {
+      this.$router.go(-1)
+    }
     return {
       init,
       text,
-      download
+      download,
+      goback
     }
   }
 })

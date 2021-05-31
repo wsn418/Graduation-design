@@ -10,12 +10,12 @@
       </div>
     </div>
     <post-list :list="list"></post-list>
-    <button
+    <!-- <button
       class="btn btn-outline-primary mt-2 mb-5 mx-auto btn-block w-25"
       @click="loadMorePage" v-if="!isLastPage"
     >
       加载更多
-    </button>
+    </button> -->
   </div>
 </template>
 

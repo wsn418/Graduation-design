@@ -58,6 +58,7 @@ export interface GlobalDataProps {
   token: string;
   error: GlobalErrorProps;
   loading: boolean;
+  index: boolean;
   columns: GlobalColumnsProps;
   posts: GlobalPostsProps;
   user: UserProps;
@@ -82,7 +83,8 @@ const store = createStore<GlobalDataProps>({
     loading: false,
     columns: { data: {}, currentPage: 0 },
     posts: { data: {}, loadedColumns: {} },
-    user: { isLogin: false }
+    user: { isLogin: false },
+    index: true
   },
   mutations: {
     createPost(state, { data }) {
@@ -124,6 +126,9 @@ const store = createStore<GlobalDataProps>({
     },
     setLoading(state, status) {
       state.loading = status
+    },
+    setIndex(state, status) {
+      state.index = status
     },
     setError(state, e: GlobalErrorProps) {
       state.error = e

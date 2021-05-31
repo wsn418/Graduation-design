@@ -1,6 +1,6 @@
 <template>
   <div class="post-list">
-    <article v-for="post in posts" :key="post._id" class="card mb-3 shadow-sm">
+    <article v-for="post in posts" :key="post._id" class="card mb-3 shadow-sm bg-white1">
       <div class="card-body">
         <h4><router-link :to="`/posts/${post._id}/`">{{post.title}}</router-link></h4>
         <div class="row my-3 align-items-center">

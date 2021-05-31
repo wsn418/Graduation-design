@@ -1,5 +1,8 @@
 <template>
-  <div class="mx-auto w-75">
+   <div class="w-50 bg-white1 mx-auto mb-2 py-2">
+    <el-page-header icon="el-icon-arrow-left" content="二维码自动生成" @click='goback'></el-page-header>
+  </div>
+  <div class="mx-auto w-50 bg-white1 pt-2 pb-5">
     <h2 class="text-center mb-3 mt-2">中国亲戚计算器</h2>
     <div style="width:450px" class="mx-auto">
         <div class="mt-4 d-flex flex-column align-items-start">
@@ -52,6 +55,7 @@
       </div>
       <span class="text-secondary">计算结果:</span>
       <el-input type="textarea" :rows="5" resize="none" style="width:400px" class="mt-3" v-model="result"> </el-input>
+      <!-- <el-input type="textarea" :rows="5" resize="none" style="width:400px" class="mt-3" placeholder="他应该和你不是很熟哦"> </el-input> -->
     </div>
     </div>
     <div>
@@ -91,7 +95,7 @@ export default defineComponent({
     const clear = () => {
       text.value = ''
     }
-    const count = () => {
+    const count = async () => {
       const option = {
         text: text.value,
         sex: sex.value,
@@ -99,7 +103,17 @@ export default defineComponent({
         reverse: reverse.value !== '0'
       }
       console.log(option)
-      result.value = relationship(option)
+      // result.value = relationship(option)
+      const res = await relationship(option)
+      console.log(res)
+      if (!res.length) {
+        result.value = '他应该和你不是很熟哦,男的就叫哥哥，女的就叫姐姐吧'
+      } else {
+        result.value = res
+      }
+    }
+    const goback = function() {
+      this.$router.go(-1)
     }
     return {
       type,
@@ -110,7 +124,8 @@ export default defineComponent({
       result,
       clear,
       count,
-      status
+      status,
+      goback
     }
   }
 })

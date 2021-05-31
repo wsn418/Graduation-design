@@ -24,7 +24,7 @@
       @file-uploaded="onFileUploaded"
     >
       <template v-slot:uploaded="dataProps">
-        <img :src="dataProps.uploadedData.data.url + '?x-oss-process=image/resize,m_fill,h_200,w_200'">
+        <img :src="dataProps.uploadedData.data + '?x-oss-process=image/resize,m_fill,h_200,w_200'">
       </template>
       <h3>点击上传头像</h3>
     </uploader>
@@ -151,10 +151,7 @@ export default defineComponent({
           payload
         }
         store.dispatch(actionName, sendData).then(() => {
-          createMessage('修改成功，2秒后跳转到首页', 'success', 2000)
-          setTimeout(() => {
-            router.push('/')
-          }, 2000)
+          createMessage('修改成功', 'success', 2000)
         })
       }
     }

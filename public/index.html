@@ -3,15 +3,41 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+    <title>知我</title>
+    <script src="https://cdn.bootcss.com/linq.js/2.2.0.2/linq.js"></script>
   </head>
   <body class="h-100 bg-E1">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app" class="d-flex flex-column h-100"></div>
+    <div class="h-100" class = 'bg-E1'>
+      <div id="app" class="d-flex flex-column h-100"></div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
+  <style>
+  .bg-E1 {
+    /* background-color: #EFF3F5; */
+    /* background-image: url('https://dss2.bdstatic.com/kfoZeXSm1A5BphGlnYG/skin/825.jpg?2'); */
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://dss2.bdstatic.com/kfoZeXSm1A5BphGlnYG/skin/825.jpg?2');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    /* filter: drop-shadow(1px 1px 4px #c74646); */
+    /* background-size:cover; */
+    /* background-color: #0b80bb !important; */
+    /* height: 100%; */
+    /* width: 100%;
+    min-width: 1000px;
+    z-index: -10;
+    background-position: center 0;
+    background-repeat: repeat-y;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover; */
+    /* zoom: 1; */
+  }
+  </style>
 </html>
